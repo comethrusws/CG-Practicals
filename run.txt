@@ -1,0 +1,1 @@
+g++ -o BLAuser BLAuser.cpp -lglut -lGLU -lGL
