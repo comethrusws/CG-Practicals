@@ -17,7 +17,7 @@ void drawLine(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2) {
     dx = x2 - x1;
     dy = y2 - y1;
 
-    if (abs(dy) > abs(dx)) {
+    if (fabs(dy) > fabs(dx)) {
         swapFloat(&x1, &y1);
         swapFloat(&x2, &y2);
         swapFloat(&dx, &dy);
@@ -69,6 +69,14 @@ void drawCoordinateGrid() {
         glVertex2f(i, 500);
     }
 
+    // Draw y = x line
+    glColor3f(1.0f, 0.0f, 0.0f); // Red color
+    drawLine(0, 0, 500, 500);
+
+    // Draw y = -x line
+    glColor3f(0.0f, 0.0f, 1.0f); // Blue color
+    drawLine(0, 500, 500, 0);
+
     glEnd();
     glFlush();
 }
@@ -115,14 +123,18 @@ void Draw() {
     drawTriangle(x1, y1, x2, y2, x3, y3, 1.0f, 1.0f, 0.0f); // Yellow color
 
     // Draw the triangle reflected about y = x
-    drawTriangle(y1, x1, y2, x2, y3, x3, 0.0f, 1.0f, 1.0f); // Cyan color
+    //drawTriangle(y1, x1, y2, x2, y3, x3, 0.0f, 1.0f, 1.0f); // Cyan color
 
     // Draw the triangle reflected about y = -x
-    //drawTriangle(-y1, x1, -y2, x2, -y3, x3, 1.0f, 0.0f, 1.0f); // Magenta color
+    drawTriangle(-y1, x1, -y2, x2, -y3, x3, 1.0f, 0.0f, 1.0f); // Magenta color
 
     // Draw the triangle reflected about the X-axis
-    //drawTriangle(x1, -y1, x2, -y2, x3, -y3, 1.0f, 0.5f, 0.0f); // Orange color
+    drawTriangle(x1, -y1, x2, -y2, x3, -y3, 1.0f, 0.5f, 0.0f); // Orange color
+
+    // Draw the triangle reflected about the Y-axis
+    drawTriangle(-x1, y1, -x2, y2, -x3, y3, 0.0f, 1.0f, 0.0f); // Green color
 }
+
 
 void MyInit() {
     glMatrixMode(GL_PROJECTION);
